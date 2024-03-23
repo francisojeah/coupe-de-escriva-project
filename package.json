@@ -1,0 +1,20 @@
+{
+  "name": "coupe-de-escriva-project",
+  "version": "1.0.0",
+  "description": "The Official website of the Coupe De Escriva Tournament",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "node apps/coupe-backend/dist/main"
+  },
+  "author": "Francis Okocha-Ojeah",
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^1.12.5"
+  },
+  "workspaces":[
+    "apps/*"
+  ]
+}
