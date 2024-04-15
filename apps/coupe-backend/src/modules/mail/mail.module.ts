@@ -22,12 +22,12 @@ const {
           port: 587,
           host: EMAIL_HOST,
           auth: {
-            user: "ojeahfrancis@gmail.com",
-            pass: "gjtvgahmvhtnfkll",
+            user: EMAIL_USER,
+            pass: EMAIL_PASSWORD,
         }
         },
         defaults: {
-          from: `"Coupe de Escriva" <${EMAIL_USER}>`,
+          from: `"Coupe de Escriva" <sport@pau.edu.ng>`,
         },
         template: {
           dir: join(__dirname, '..', '../src/modules/mail/templates'),
