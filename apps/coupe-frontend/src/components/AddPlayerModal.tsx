@@ -160,6 +160,7 @@ const AddPlayerModal = ({ openModal, setOpenModal }: AddPlayerModalProps) => {
                         }
                       }}
                     >
+                      <option value="">Select Team</option>
                       {teamsData?.map((team: any) => (
                         <option key={team._id} value={team._id}>
                           {`${team.name} - ${team.sport} - ${team.division}`}

@@ -218,7 +218,8 @@ const AddMatchStatsModal = ({
                     <input
                       type="number"
                       className="shadow-none px-4 py-2 bg-white rounded-lg border-[#D9D9D9] w-full"
-                      value={values.selectedNumber}
+                      required
+                      placeholder="1"
                       onChange={(e) => {
                         setFieldValue("selectedNumber", e.target.value);
                       }}
