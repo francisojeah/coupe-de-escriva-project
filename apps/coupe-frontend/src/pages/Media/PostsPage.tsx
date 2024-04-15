@@ -58,7 +58,7 @@ const PostsPage = () => {
   return (
     <PageLayout>
       <>
-      <MetaTags
+        <MetaTags
           title={"Posts | Coupe de Escriva"}
           description={"Coupe de Escriva"}
           pageUrl={window.location.href}
@@ -93,12 +93,12 @@ const PostsPage = () => {
             </div>
           </div>
           {userSlice?.user?.roles.includes(Role.Admin) && (
-          <button
-            className="bg-custom-primary-1 flex w-52 text-white text-[16px] h-fit font-[700] py-2 px-4 rounded-[5px] justify-center hover:text-custom-primary-1 hover:border-custom-primary-1 hover:border hover:bg-white"
-            onClick={handleAddPost}
-          >
-            Add a new post
-          </button>
+            <button
+              className="bg-custom-primary-1 flex w-52 text-white text-[16px] h-fit font-[700] py-2 px-4 rounded-[5px] justify-center hover:text-custom-primary-1 hover:border-custom-primary-1 hover:border hover:bg-white"
+              onClick={handleAddPost}
+            >
+              Add a new post
+            </button>
           )}
           <>
             {postsIsLoading ? (
@@ -124,6 +124,7 @@ const PostsPage = () => {
                       </div>
                       <div className="md:px-4 px-2 flex flex-col justify-between md:h-24 h-28 hover:underline">
                         <p className="text-sm font-medium">{post.title}</p>
+                        <p className="text-sm">By {post?.author}</p>
                         <p className="text-sm">
                           {formatDateWithoutTime(post.createdAt)}
                         </p>

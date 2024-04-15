@@ -25,10 +25,13 @@ const PostPage = () => {
       ) : (
         <div className=" flex flex-col gap-12">
           <div className="md:px-4 px-2 flex flex-col justify-between">
-            <p className="text-2xl md:text-3xl lg:text-4xl mb-8 font-bold">
+            <p className="text-2xl md:text-3xl lg:text-4xl mb-4 font-bold">
               {postData?.title}
             </p>
-            <p className="">{formatDateWithoutTime(postData?.createdAt)}</p>
+            <p className="text-lg mb-4 text-[#888C90]">
+              By {postData?.author}
+            </p>
+            <p className="text-[#888C90]">{formatDateWithoutTime(postData?.createdAt)}</p>
           </div>
           <div className="relative overflow-hidden rounded-2xl">
             <div
