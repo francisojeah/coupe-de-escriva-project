@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import PageLayout from "../../components/PageLayout";
+import MetaTags from "../../components/MetaTags";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -7,7 +9,11 @@ const LandingPage = () => {
     navigate("/home", { replace: true });
   }, []);
 
-  return <div></div>;
+  return (
+    <PageLayout>
+      <MetaTags />
+    </PageLayout>
+  );
 };
 
 export default LandingPage;

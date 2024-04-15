@@ -103,7 +103,7 @@ const AddMatchModal = ({ openModal, setOpenModal }: AddMatchModalProps) => {
                 gameweek: GameWeek.GameWeek1,
               },
             }}
-            // validationSchema={AddFixtureResultSchema}
+            validationSchema={AddFixtureResultSchema}
             onSubmit={handleAddMatch}
           >
             {({ errors, setFieldValue }) => (

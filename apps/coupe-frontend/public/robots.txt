@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://coupedeescriva.netlify.app
+
+# Sitemaps
+Sitemap: https://coupedeescriva.netlify.app/sitemap.xml
