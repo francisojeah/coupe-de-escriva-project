@@ -47,7 +47,13 @@ const AddMatchModal = ({ openModal, setOpenModal }: AddMatchModalProps) => {
       setIsAddMatchLoading(true);
 
       try {
-        const response = await addMatch(props);
+        const { sport, division, ...oldProps } = props;
+        const updatedProps = {
+          division: selectedTeamDivison,
+          sport: selectedTeamSport,
+          ...oldProps,
+        };
+        const response = await addMatch(updatedProps);
 
         if (response?.data) {
           setOpenStatusModal(true);
@@ -97,10 +103,10 @@ const AddMatchModal = ({ openModal, setOpenModal }: AddMatchModalProps) => {
                 gameweek: GameWeek.GameWeek1,
               },
             }}
-            validationSchema={AddFixtureResultSchema}
+            // validationSchema={AddFixtureResultSchema}
             onSubmit={handleAddMatch}
           >
-            {({ errors, values, setFieldValue }) => (
+            {({ errors, setFieldValue }) => (
               <Form className="flex w-full flex-col gap-7 overflow-auto">
                 {addMatchIsError && (
                   <Alert color="failure" className="py-3">
@@ -256,19 +262,6 @@ const AddMatchModal = ({ openModal, setOpenModal }: AddMatchModalProps) => {
                         {errors.fixtures.gameweek}
                       </p>
                     )}
-                  </div>
-                </div>
-
-                {/* Image Input Box */}
-                <div className="w-full flex flex-col gap-3 md:gap-0 md:flex-row">
-                  <div className="w-40 text-slate-700 text-sm font-medium  leading-tight">
-                    Image
-                  </div>
-                  <div className="gap-5 flex items-center w-full flex-row">
-                    <img
-                      src={values?.fixtures.image || ""}
-                      className="w-18 h-14 border  bg-gray-100 rounded-full justify-center items-center flex"
-                    />
                   </div>
                 </div>
 

@@ -247,6 +247,5 @@ export interface AddFixture {
   home_team_id: string;
   away_team_id: string;
   date: string;
-  image?: string;
   gameweek: GameWeek;
 }
