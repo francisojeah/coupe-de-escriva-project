@@ -7,7 +7,7 @@ const LandingPage = () => {
     navigate("/home", { replace: true });
   }, []);
 
-  return <div>LandingPage</div>;
+  return <div></div>;
 };
 
 export default LandingPage;

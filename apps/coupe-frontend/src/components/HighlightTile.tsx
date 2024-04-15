@@ -4,6 +4,7 @@ import { useState } from "react";
 import { formatDateWithoutTime } from "../utils/constants";
 
 const YoutubeTile = ({
+  useType,
   videoId,
   title,
   publishedAt,
@@ -30,11 +31,20 @@ const YoutubeTile = ({
 
   return (
     <>
-      <div className="youtube-tile cursor-pointer flex flex-col gap-3" onClick={handleYoutube}>
+      <div
+        className="youtube-tile cursor-pointer flex flex-col gap-3"
+        onClick={handleYoutube}
+      >
         <div className="relative overflow-hidden rounded-2xl">
           <div
-            className="w-full scale-110 bg-[#D9D9D9] border border-[#D9D9D9] hover:scale-125 h-36 md:h-44" style={{ backgroundImage: `url(${thumbnailUrl})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
-        ></div>
+            className={`w-full scale-110 bg-[#D9D9D9] border border-[#D9D9D9] hover:scale-125 ${useType === "home-page" ? "h-36 md:h-44" : "h-36 md:h-44 lg:h-56"}`}
+            style={{
+              backgroundImage: `url(${thumbnailUrl})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          ></div>
           <div className="absolute flex bottom-0 text-center items-center gap-1.5 left-0 bg-custom-primary-1 rounded-tr-xl text-white text-sm py-1.5 pl-4 px-2.5 font-bold">
             <FaPlay color="white" />
             {formattedDuration}

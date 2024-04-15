@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
 import { FaArrowRight } from "react-icons/fa6";
+import MetaTags from "../../components/MetaTags";
 
 const teamsList = [
   {
@@ -26,7 +27,7 @@ const teamsList = [
   },
   {
     title: "TSG Walkers",
-    logo: "/assets/images/tsg-logo.svg",
+    logo: "/assets/images/tsg-walkers-logo.svg",
     label: "tsg-walkers",
     color: "#AA0F0D",
     textColor: "white",
@@ -36,6 +37,12 @@ const teamsList = [
 const TeamsPage = () => {
   return (
     <PageLayout>
+      <>
+      <MetaTags
+          title={"Teams | Coupe de Escriva"}
+          description={"Coupe de Escriva"}
+          pageUrl={window.location.href}
+        />
       <div className="flex flex-col gap-12">
         <div className="text-3xl md:text-4xl font-bold">Teams</div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-24 md:gap-y-16">
@@ -56,6 +63,7 @@ const TeamsPage = () => {
           ))}
         </div>
       </div>
+      </>
     </PageLayout>
   );
 };

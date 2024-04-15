@@ -8,7 +8,9 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AppContextType } from "./global/contexts";
-
+import { HelmetProvider } from "react-helmet-async";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+const { VITE_REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 type Props = {
   assetMap?: {
     "styles.css": string;
@@ -38,172 +40,223 @@ const App: React.FC<Props> = ({ assetMap }) => {
 
     //Default settings on dev mode
     let baseUrl = "/";
-    let title = "Hello World";
+    // let title = "Hello World";
 
     if (assetMap) {
       //prod mode. Sent by ssr endpoint.
       baseUrl = assetMap.baseUrl;
-      title = assetMap.initialContentMap.title!;
+      // title = assetMap.initialContentMap.title!;
     }
-    console.log(title);
-    console.log(baseUrl);
-    //console.log(`assetMap in AppWithNavDemo = ${JSON.stringify(assetMap)}`)
-
+   
     let persister = persistStore(store);
 
     return (
       <AppContext.Provider value={{ baseUrl }}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persister}>
-            <Router>
-              <Routes>
-                <Route
-                  path="/home"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Home/HomePage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Home/LandingPage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Auth/Login"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                 <Route
-                  path="/signup"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Auth/SignUp"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/fantasy"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(
-                          () =>
-                            import(
-                              "../src/pages/Fantasy-Coupe/FantasyCoupePage"
+        <GoogleOAuthProvider clientId={VITE_REACT_APP_GOOGLE_CLIENT_ID}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persister}>
+              <HelmetProvider>
+                <Router>
+                  <Routes>
+                    <Route
+                      path="/home"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Home/HomePage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Home/LandingPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/login"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Auth/Login"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/signup"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Auth/SignUp"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/fantasy"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () =>
+                                import(
+                                  "../src/pages/Fantasy-Coupe/FantasyCoupePage"
+                                )
                             )
-                        )
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/matches"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Matches/MatchesPage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/players"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Players/PlayersPage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/standings"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(
-                          () => import("../src/pages/Standings/StandingsPage")
-                        )
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/stats"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Stats/StatsPage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/table-predictor"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(
-                          () =>
-                            import(
-                              "../src/pages/Table-Predictor/TablePredictorPage"
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/matches"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () => import("../src/pages/Matches/MatchesPage")
                             )
-                        )
-                      )}
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/teams"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Teams/TeamsPage"))
-                      )}
-                    </Suspense>
-                  }
-                />
-                 <Route
-                  path="/teams/:name"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Teams/TeamDetails"))
-                      )}
-                    </Suspense>
-                  }
-                />
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/matches/:id"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () => import("../src/pages/Matches/MatchDetails")
+                            )
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/players"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () => import("../src/pages/Players/PlayersPage")
+                            )
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/standings"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () =>
+                                import("../src/pages/Standings/StandingsPage")
+                            )
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/stats"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Stats/StatsPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/table-predictor"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(
+                              () =>
+                                import(
+                                  "../src/pages/Table-Predictor/TablePredictorPage"
+                                )
+                            )
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/teams"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Teams/TeamsPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/teams/:name"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Teams/TeamDetails"))
+                          )}
+                        </Suspense>
+                      }
+                    />
 
-                <Route
-                  path="*"
-                  element={
-                    <Suspense fallback={<PageLoader />}>
-                      {React.createElement(
-                        lazy(() => import("../src/pages/Errors/NotFound"))
-                      )}
-                    </Suspense>
-                  }
-                />
-              </Routes>
-            </Router>
-          </PersistGate>
-        </Provider>
+                    <Route
+                      path="/videos"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Media/VideosPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+
+                    <Route
+                      path="/posts"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Media/PostsPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+
+                    <Route
+                      path="/posts/:id"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Media/PostPage"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+
+                    <Route
+                      path="*"
+                      element={
+                        <Suspense fallback={<PageLoader />}>
+                          {React.createElement(
+                            lazy(() => import("../src/pages/Errors/NotFound"))
+                          )}
+                        </Suspense>
+                      }
+                    />
+                  </Routes>
+                </Router>
+              </HelmetProvider>
+            </PersistGate>
+          </Provider>
+        </GoogleOAuthProvider>
       </AppContext.Provider>
     );
   };

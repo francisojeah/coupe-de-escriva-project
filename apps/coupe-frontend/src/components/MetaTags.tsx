@@ -1,0 +1,45 @@
+import { Helmet } from "react-helmet-async";
+
+type MetaTagsProps = {
+  title: string;
+  description: string;
+  keywords: string;
+  pageUrl: string;
+};
+
+const MetaTags = ({ title, description, keywords, pageUrl }: MetaTagsProps) => {
+  return (
+    <Helmet>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="keywords" content={keywords} />
+      <meta
+        name="google-site-verification"
+        content="_f_J8S21gHlUrzHpMn65mddGC8gFWxunlZ2BWSmBPbY"
+      />
+      <meta name="description" content={description} />
+      <meta charSet="utf-8" />
+      <link rel="icon" href={"/images/logo.png"} />
+      <link rel="canonical" href={`${pageUrl}`} />
+      <title>{title}</title>
+      <meta name="og:title" content={title} />
+      <meta name="og:description" content={description} />
+      <meta name="og:image" content={"/images/logo.png"} />
+      <meta name="og:url" content={`${pageUrl}`} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={"/images/logo.png"} />
+    </Helmet>
+  );
+};
+
+MetaTags.defaultProps = {
+  title: "Coupe De Escriva News, Fixtures, Scores & Results | Official Website",
+  keywords:
+    "Coupe De Escriva, CoupeDeEscriva Sports, Soccer, Football, Basketball,  Volleyball, League, Offical, Coupe",
+  description:
+    "Get the latest Coupe De Escriva news, fixtures, results, video hightlights, transfers and more from the official website of the Coupe De Escriva",
+  pageUrl: window.location.href,
+};
+
+export default MetaTags;

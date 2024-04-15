@@ -26,7 +26,7 @@ const HomeTeams = () => {
         },
         {
           title: "TSG Walkers",
-          logo: "/assets/images/tsg-logo.svg",
+          logo: "/assets/images/tsg-walkers-logo.svg",
           label: "tsg-walkers",
           color: "#AA0F0D",
           textColor: "white",
@@ -41,7 +41,7 @@ const HomeTeams = () => {
 
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 md:gap-14 w-full">
           {teamsList.map(({logo, label }, index) => (
-            <Link to={`/${label}`} key={index}>
+            <Link to={`/teams/${label}`} key={index}>
               <div
                 className={`flex items-center justify-center  gap-4 hover:shadow-lg rounded-2xl border-2 p-6 border-[#D9D9D9]`}
               >

@@ -12,18 +12,18 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import menuSlice from "./slices/menuSlice";
-import authSlice from "./slices/authSlice";
+import userSlice from "./slices/userSlice";
 import sportSlice from "./slices/sportSlice";
 
 export type RootState = {
   menu: any;
-  auth: any;
+  user: any;
   sport: any;
 };
 
 const rootReducer = combineReducers<any>({
   menu: menuSlice,
-  auth: authSlice,
+  user: userSlice,
   sport: sportSlice,
   [appApi.reducerPath]: appApi.reducer,
 });

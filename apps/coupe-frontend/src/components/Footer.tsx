@@ -29,10 +29,10 @@ const footerPageLinks = [
     title: "Fantasy Coupe",
     link: "fantasy",
   },
-  {
-    title: "Table Predictor",
-    link: "table-predictor",
-  },
+  // {
+  //   title: "Table Predictor",
+  //   link: "table-predictor",
+  // },
 ];
 
 const Footer = () => {

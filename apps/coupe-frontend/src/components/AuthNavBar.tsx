@@ -3,22 +3,22 @@ import {
   Avatar,
   Dropdown,
   DropdownDivider,
+  DropdownHeader,
   DropdownItem,
 } from "flowbite-react";
 import { UserStateProps } from "../store/interfaces/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { appApi } from "../store/slices/appSlice";
-import { logoutUser } from "../store/slices/authSlice";
+import { logoutUser } from "../store/slices/userSlice";
 import { Link, useLocation } from "react-router-dom";
 import { updateMenu } from "../store/slices/menuSlice";
 import { updateSport } from "../store/slices/sportSlice";
 import { SportsType } from "../utils/constants";
-// import { useGetCurrentSessionQuery } from "../store/slices/appSlice";
 
 const AuthNavBar = () => {
-  const authSlice = useSelector<RootState, UserStateProps>(
-    (state) => state.auth.user
+  const userSlice = useSelector<RootState, UserStateProps>(
+    (state) => state.user
   );
 
   const location = useLocation();
@@ -73,11 +73,11 @@ const AuthNavBar = () => {
       link: "fantasy",
       isActive: false,
     },
-    {
-      title: "Table Predictor",
-      link: "table-predictor",
-      isActive: false,
-    },
+    // {
+    //   title: "Table Predictor",
+    //   link: "table-predictor",
+    //   isActive: false,
+    // },
   ];
 
   const sports = [
@@ -179,12 +179,29 @@ const AuthNavBar = () => {
         </div>
 
         <div className="hidden lg:flex md:order-2 gap-1 md:gap-3">
-          {authSlice?.firstName ? (
-            <>
-              <div className="flex">
-                <Avatar alt="User" img="/assets/images/profile.png" rounded />
-              </div>
-            </>
+          {userSlice?.user?.email ? (
+            <Dropdown
+              arrowIcon={true}
+              inline
+              className="md:w-[20%]"
+              label={
+                <div className="flex items-center gap-4">
+                  <Avatar alt="User" img={userSlice?.user?.profileImage} rounded />
+                </div>
+              }
+            >
+              <DropdownHeader>
+            <p className="text-xs font-bold text-custom-primary-1">{`${
+              userSlice?.user?.firstname || "Coupe"
+            } ${userSlice?.user?.lastname || "User"}`}</p>
+            <span className="block truncate text-sm font-medium">
+              Coupe de Escriva user
+            </span>
+          </DropdownHeader>
+              <DropdownItem onClick={handleLogout} className="text-base">
+                Sign out
+              </DropdownItem>
+            </Dropdown>
           ) : (
             <Link to={"/login"}>
               <div className="w-[5.5rem] h-[2.5rem]  flex justify-center items-center bg-custom-primary-1 hover:bg-custom-primary-2 text-white rounded-[0.5rem] ">
@@ -200,12 +217,12 @@ const AuthNavBar = () => {
             inline
             className="md:w-[35%]"
             label={
-              authSlice?.firstName ? (
+              userSlice?.user?.email ? (
                 <>
-                  <div className="flex gap-4">
+                  <div className="flex items-center gap-4">
                     <Avatar
                       alt="User"
-                      img="/assets/images/profile.png"
+                      img={userSlice?.user?.profileImage}
                       rounded
                     />
                     <svg
@@ -246,6 +263,14 @@ const AuthNavBar = () => {
               )
             }
           >
+            <DropdownHeader>
+            <p className="text-xs font-bold text-custom-primary-1">{`${
+              userSlice?.user?.firstname || "Coupe"
+            } ${userSlice?.user?.lastname || "User"}`}</p>
+            <span className="block truncate text-sm font-medium">
+              Coupe de Escriva user
+            </span>
+          </DropdownHeader>
             {menus.map(({ title, link }, index) => (
               <DropdownItem className="w-full" key={index}>
                 <Link className="w-full" to={`/${link}`} key={index}>
@@ -253,18 +278,21 @@ const AuthNavBar = () => {
                 </Link>
               </DropdownItem>
             ))}
-            <DropdownItem className="w-full">
-              <Link to={"/login"}>
-                <div className="w-[5.5rem] h-[2.5rem]  flex justify-center items-center bg-custom-primary-1 hover:bg-custom-primary-2 text-white rounded-[0.5rem] ">
-                  <p className="text-sm">Login</p>
-                </div>
-              </Link>
-            </DropdownItem>
             <DropdownDivider />
 
-            <DropdownItem onClick={handleLogout} className="text-base">
-              Sign out
-            </DropdownItem>
+            {userSlice?.user?.email ? (
+              <DropdownItem onClick={handleLogout} className="text-base">
+                Sign out
+              </DropdownItem>
+            ) : (
+              <DropdownItem className="w-full">
+                <Link to={"/login"}>
+                  <div className="w-[5.5rem] h-[2.5rem]  flex justify-center items-center bg-custom-primary-1 hover:bg-custom-primary-2 text-white rounded-[0.5rem] ">
+                    <p className="text-sm">Login</p>
+                  </div>
+                </Link>
+              </DropdownItem>
+            )}
           </Dropdown>
         </div>
       </div>
