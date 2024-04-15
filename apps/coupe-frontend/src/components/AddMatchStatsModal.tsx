@@ -110,7 +110,7 @@ const AddMatchStatsModal = ({
             validationSchema={AddMatchStatsSchema}
             onSubmit={handleAddMatchStats}
           >
-            {({ errors, values, setFieldValue }) => (
+            {({ errors, setFieldValue }) => (
               <Form className="flex w-full flex-col gap-7 overflow-auto">
                 {addMatchStatsIsError && (
                   <Alert color="failure" className="py-3">
