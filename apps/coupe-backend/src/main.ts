@@ -66,9 +66,7 @@ async function bootstrap() {
     this.logger.error(error);
   }
 
-  await app.listen(
-    process.env.APP_SERVER_LISTEN_PORT,
-  );
+  await app.listen(process.env.APP_SERVER_LISTEN_PORT, '0.0.0.0');
 
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
