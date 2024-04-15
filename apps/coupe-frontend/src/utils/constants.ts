@@ -6,7 +6,7 @@ export enum SportsType {
   VOLLEYBALL = "volleyball",
 }
 
-export const proxyAddress = "https://coupe-de-escriva-project.onrender.com";
+export const proxyAddress = "https://coupe-de-escriva-backend.onrender.com";
 
 export const getVideoId = (link: string): string => {
   const regex =

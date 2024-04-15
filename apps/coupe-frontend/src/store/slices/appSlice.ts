@@ -10,7 +10,7 @@ import { StandingsProps } from "../interfaces/user.interface";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://coupe-de-escriva-project.onrender.com/",
+  baseUrl: "https://coupe-de-escriva-backend.onrender.com/",
   prepareHeaders: (headers, { getState }: any) => {
     const token = getState()?.auth?.token;
 
