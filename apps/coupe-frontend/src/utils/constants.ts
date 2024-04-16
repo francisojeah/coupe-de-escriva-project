@@ -50,6 +50,16 @@ export interface PostProps {
   createdAt?: string;
 }
 
+export interface PictureProps {
+  _id?: any;
+  season: any;
+  sport: string;
+  gameweek: GameWeek; 
+  image: string;
+  date: Date;
+}
+
+
 export enum FootballPosition {
   GOALKEEPER = "Goalkeeper",
   DEFENDER = "Defender",

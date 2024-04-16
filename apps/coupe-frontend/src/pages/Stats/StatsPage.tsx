@@ -27,6 +27,8 @@ const StatsPage = () => {
       seasonId: selectedSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
   const handleSeasonChange = (season: any) => {

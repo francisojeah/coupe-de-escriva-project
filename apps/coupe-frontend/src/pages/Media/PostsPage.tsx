@@ -39,7 +39,9 @@ const PostsPage = () => {
   };
 
   const { data: postsData, isLoading: postsIsLoading } =
-    useGetPostsBySeasonQuery(selectedSeason?._id);
+    useGetPostsBySeasonQuery(selectedSeason?._id, {
+      refetchOnMountOrArgChange: 10, 
+    });
 
   const cardsPerPage = 9;
   const totalCards = postsData?.length || 0;

@@ -49,7 +49,6 @@ const App: React.FC<Props> = ({ assetMap }) => {
     }
    
     let persister = persistStore(store);
-
     return (
       <AppContext.Provider value={{ baseUrl }}>
         <GoogleOAuthProvider clientId={VITE_REACT_APP_GOOGLE_CLIENT_ID}>

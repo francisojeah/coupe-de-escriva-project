@@ -29,13 +29,19 @@ const AddLineUpModal: React.FC<AddLineUpModalProps> = ({
   const [selectedPlayers, setSelectedPlayers] = useState<PlayerLineup[]>([]);
   const { id: fixtureResultId } = useParams<{ id: string }>();
 
-  const { data: fixtureResultData } =
-    useGetFixtureResultByIdQuery(fixtureResultId);
+  const { data: fixtureResultData } = useGetFixtureResultByIdQuery(
+    fixtureResultId,
+    {
+      refetchOnMountOrArgChange: 10,
+    }
+  );
 
   const [addLineUp, { error: addLineUpError, isError: addLineUpIsError }]: any =
     useAddLineUpMutation();
 
-  const { data: playersData } = useGetPlayersByTeamIdQuery(team);
+  const { data: playersData } = useGetPlayersByTeamIdQuery(team, {
+    refetchOnMountOrArgChange: 10, 
+  });
 
   useEffect(() => {
     if (playersData) {
@@ -58,17 +64,15 @@ const AddLineUpModal: React.FC<AddLineUpModalProps> = ({
     );
   };
 
-
   const handleAddLineUp = useCallback(
     async (props: TeamLineup) => {
       setIsAddLineUpLoading(true);
       try {
-
         const lineupObject = {
           id: fixtureResultId,
           ...props,
           players: selectedPlayers,
-        }
+        };
         const response = await addLineUp(lineupObject);
 
         if (response?.data) {

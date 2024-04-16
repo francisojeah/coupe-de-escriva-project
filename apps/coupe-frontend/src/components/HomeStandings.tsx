@@ -1,6 +1,11 @@
 import { Dropdown, DropdownItem } from "flowbite-react";
 import { useState } from "react";
-import { FaArrowRight, FaChevronDown, FaChevronUp, FaMinus } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaChevronDown,
+  FaChevronUp,
+  FaMinus,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   useGetSeasonsQuery,
@@ -26,12 +31,16 @@ const HomeStandings = () => {
   );
 
   const { data: standingsData, isLoading: isLoadingStandings } =
-    useGetStandingsBySeasonDivisionSportQuery({
-      seasonId: defaultSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    });
-
+    useGetStandingsBySeasonDivisionSportQuery(
+      {
+        seasonId: defaultSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10,
+      }
+    );
 
   const handleTypeChange = (type: any) => {
     setSelectedType(type);
@@ -139,7 +148,7 @@ const HomeStandings = () => {
               <div></div>
             ) : (
               <div className="flex flex-col w-full md:items-center">
-                {standingsData?.map((standing:any, index:any) => (
+                {standingsData?.map((standing: any, index: any) => (
                   <div
                     key={index}
                     className={`border-b-2 ${index < 2 ? "border-l-4 border-l-[#4D8A2F]" : ""} flex h-auto gap-8 border-gray-300 px-3 py-5 md:w-full items-center md:justify-between`}

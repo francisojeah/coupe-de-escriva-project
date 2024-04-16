@@ -12,11 +12,15 @@ import AddPlayerModal from "../../components/AddPlayerModal";
 import { Role, UserStateProps } from "../../store/interfaces/user.interface";
 import MetaTags from "../../components/MetaTags";
 import PageLoader from "../../components/PageLoader";
+import { FaEdit } from "react-icons/fa";
+import EditPlayerModal from "../../components/EditPlayerModal";
 
 const PlayersPage = () => {
   const [selectedType, setSelectedType] = useState("mens");
   const [selectedTeam, setSelectedTeam] = useState("All");
   const [openAddPlayerModal, setOpenAddPlayerModal] = useState(false);
+  const [openEditPlayerModal, setOpenEditPlayerModal] = useState(false);
+  const [editPlayerId, setEditPlayerId] = useState("");
 
   const userSlice = useSelector<RootState, UserStateProps>(
     (state) => state.user
@@ -34,11 +38,16 @@ const PlayersPage = () => {
   const [selectedSeason, setSelectedSeason] = useState(defaultSeason);
 
   const { data: playersData, isLoading: isLoadingPlayers } =
-    useGetPlayersBySeasonDivisionSportQuery({
-      seasonId: selectedSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    });
+    useGetPlayersBySeasonDivisionSportQuery(
+      {
+        seasonId: selectedSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10, 
+      }
+    );
 
   const handleSeasonChange = (season: any) => {
     setSelectedSeason(season);
@@ -54,6 +63,11 @@ const PlayersPage = () => {
 
   const handleAddPlayer = () => {
     setOpenAddPlayerModal(true);
+  };
+
+  const handleEditPlayer = (playerId: string) => {
+    setEditPlayerId(playerId);
+    setOpenEditPlayerModal(true);
   };
 
   return (
@@ -234,6 +248,18 @@ const PlayersPage = () => {
                                                 "Captain" && " (C)"}
                                             </span>
                                           </p>
+                                          {userSlice?.user?.roles.includes(
+                                            Role.Admin
+                                          ) && (
+                                            <div
+                                              className="px-2 cursor-pointer"
+                                              onClick={() =>
+                                                handleEditPlayer(player?._id)
+                                              }
+                                            >
+                                              <FaEdit />
+                                            </div>
+                                          )}
                                         </div>
                                       )
                                     )}
@@ -321,6 +347,11 @@ const PlayersPage = () => {
               openModal={openAddPlayerModal}
               setOpenModal={setOpenAddPlayerModal}
             />
+            <EditPlayerModal
+              openModal={openEditPlayerModal}
+              setOpenModal={setOpenEditPlayerModal}
+              playerId={editPlayerId}
+            />
           </>
         )}
       </>
@@ -345,7 +376,6 @@ export const groupPlayersByPosition = (players: any[]) => {
       groupedPlayers.push({ position: player.position, players: [player] });
     }
   });
-
 
   return groupedPlayers;
 };

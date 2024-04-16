@@ -37,7 +37,9 @@ const MatchDetails = () => {
   );
 
   const { data: fixtureResultData, isLoading: isLoadingFixtureResult } =
-    useGetFixtureResultByIdQuery(fixtureResultId);
+    useGetFixtureResultByIdQuery(fixtureResultId, {
+      refetchOnMountOrArgChange: 10, 
+    });
 
   const handleChangeTab = (tabId: any) => {
     setActiveDetailTab(tabId);
@@ -103,10 +105,14 @@ const MatchDetails = () => {
   );
 
   const { data: homePlayersData, isLoading: isLoadingHomePlayers } =
-    useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.home_team_id?._id);
+    useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.home_team_id?._id, {
+      refetchOnMountOrArgChange: 10, 
+    });
 
   const { data: awayPlayersData, isLoading: isLoadingAwayPlayers } =
-    useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.away_team_id?._id);
+    useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.away_team_id?._id, {
+      refetchOnMountOrArgChange: 10, 
+    });
 
   const positionAbbreviations: any = {
     Defender: "DEF",

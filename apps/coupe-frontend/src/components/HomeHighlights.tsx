@@ -8,7 +8,6 @@ import { VideoDetails } from "../utils/constants";
 import { useGetVideosWithLimitQuery } from "../store/slices/appSlice";
 // require('dotenv').config();
 
-
 const HomeHighlights = () => {
   // const dispatch = useDispatch<any>();
 
@@ -16,10 +15,10 @@ const HomeHighlights = () => {
   //   (state) => state.user
   // );
 
-  const { data: videoData } = useGetVideosWithLimitQuery(10);
+  const { data: videoData } = useGetVideosWithLimitQuery(10, {
+    refetchOnMountOrArgChange: 10,
+  });
 
-
-  
   const autoplaySettings = {
     delay: 4000,
     disableOnInteraction: false,

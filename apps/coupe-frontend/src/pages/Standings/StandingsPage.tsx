@@ -38,6 +38,8 @@ const StandingsPage = () => {
       seasonId: selectedSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
     const { data: fixtureResultsData, isLoading: isLoadingfixtureResults } =
@@ -45,6 +47,8 @@ const StandingsPage = () => {
       seasonId: defaultSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
 

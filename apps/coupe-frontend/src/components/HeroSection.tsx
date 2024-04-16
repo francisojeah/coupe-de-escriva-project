@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  useGetPlayersCountByCurrentSeasonQuery,
-} from "../store/slices/appSlice";
+import { useGetPlayersCountByCurrentSeasonQuery } from "../store/slices/appSlice";
 
 const useCountUp = (targetValue: number, step: number, delay: number) => {
   const [count, setCount] = useState(0);
@@ -49,8 +47,12 @@ const HeroSection = () => {
   const delays = [300, 300, 30];
   const labels = ["Teams", "Sports", "Players"];
 
-  const { data: playersCountData } =
-    useGetPlayersCountByCurrentSeasonQuery();
+  const { data: playersCountData } = useGetPlayersCountByCurrentSeasonQuery(
+    undefined,
+    {
+      refetchOnMountOrArgChange: 10,
+    }
+  );
 
   let countSection = null;
   if (playersCountData !== undefined) {

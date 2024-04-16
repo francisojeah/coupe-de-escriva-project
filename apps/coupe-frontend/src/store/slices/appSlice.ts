@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   FixtureResultProps,
+  PictureProps,
   PlayerProps,
   PostProps,
   TeamsProps,
@@ -10,7 +11,8 @@ import { StandingsProps } from "../interfaces/user.interface";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://coupe-de-escriva-backend.onrender.com/",
+  // baseUrl: "http://localhost:3000/",
+  baseUrl: "http://localhost:3000/",
   prepareHeaders: (headers, { getState }: any) => {
     const token = getState()?.auth?.token;
 
@@ -25,8 +27,8 @@ const baseQuery = fetchBaseQuery({
 export const appApi = createApi({
   reducerPath: "appApi",
   baseQuery,
-  tagTypes: ["User", "Standing", "Post", "Player", "Team", "Match"],
-  keepUnusedDataFor: 60000,
+  tagTypes: ["User", "Standing", "Post", "Player", "Team", "Match", "Picture"],
+  keepUnusedDataFor: 0,
   endpoints: (builder) => ({
     loadUser: builder.query<any, void>({
       query: () => "users/user",
@@ -61,7 +63,29 @@ export const appApi = createApi({
       query: ({ seasonId, maxLimit }) =>
         `/posts/season/${seasonId}/posts-with-limit/${maxLimit}`,
       providesTags: (_result, _error, { seasonId, maxLimit }) => [
-        { type: "Standing", id: `${seasonId}-${maxLimit}` },
+        { type: "Post", id: `${seasonId}-${maxLimit}` },
+      ],
+    }),
+
+    getPicturesById: builder.query<PictureProps, any>({
+      query: (pictureId) => `/pictures/${pictureId}`,
+      providesTags: (_result, _error, pictureId) => [
+        { type: "Picture", id: pictureId },
+      ],
+    }),
+
+    getPicturesBySeasonSport: builder.query<PictureProps[], any>({
+      query: ({ seasonId, sport }) => `/pictures/season/${seasonId}/${sport}`,
+      providesTags: (_result, _error, { seasonId, sport }) => [
+        { type: "Picture", id: `${seasonId}-${sport}` },
+      ],
+    }),
+
+    getPicturesBySeasonSportWithLimit: builder.query<PictureProps[], any>({
+      query: ({ seasonId, maxLimit }) =>
+        `/pictures/season/${seasonId}/${seasonId}/pictures-with-limit/${maxLimit}`,
+      providesTags: (_result, _error, { seasonId, sport, maxLimit }) => [
+        { type: "Picture", id: `${seasonId}-${sport}-${maxLimit}` },
       ],
     }),
 
@@ -93,10 +117,12 @@ export const appApi = createApi({
     updateStanding: builder.mutation<StandingsProps, Partial<StandingsProps>>({
       query: ({ _id, ...updates }) => ({
         url: `/standings/${_id}`,
-        method: "PATCH",
+        method: "PUT",
         body: updates,
       }),
-      invalidatesTags: (_result, _error, { _id }) => [{ type: "Standing", _id }], // Invalidate cache for the updated standing
+      invalidatesTags: (_result, _error, { _id }) => [
+        { type: "Standing", _id },
+      ], // Invalidate cache for the updated standing
     }),
 
     createPost: builder.mutation<PostProps, any>({
@@ -106,6 +132,15 @@ export const appApi = createApi({
         body: postDto,
       }),
       invalidatesTags: ["Post"], // Invalidate cache for players after creating a new player
+    }),
+
+    createPicture: builder.mutation<PictureProps, any>({
+      query: (pictureDto) => ({
+        url: "/pictures",
+        method: "POST",
+        body: pictureDto,
+      }),
+      invalidatesTags: ["Picture"], // Invalidate cache for players after creating a new player
     }),
 
     createPlayer: builder.mutation<PlayerProps, any>({
@@ -126,7 +161,9 @@ export const appApi = createApi({
 
     getPlayersByTeamId: builder.query<PlayerProps[], string>({
       query: (teamId) => `/players/team/${teamId}`,
-      providesTags: (_result, _error, teamId) => [{ type: "Player", id: teamId }],
+      providesTags: (_result, _error, teamId) => [
+        { type: "Player", id: teamId },
+      ],
     }),
 
     getTeams: builder.query<TeamsProps[], void>({
@@ -134,18 +171,13 @@ export const appApi = createApi({
       providesTags: [{ type: "Team" }],
     }),
 
-    updatePlayer: builder.mutation<
-      PlayerProps,
-      { playerId: string; updates: any }
-    >({
+    updatePlayer: builder.mutation<PlayerProps, any>({
       query: ({ playerId, updates }) => ({
-        url: `/players/${playerId}`,
-        method: "PUT",
+        url: `/players/update/${playerId}`,
+        method: "PATCH",
         body: updates,
       }),
-      invalidatesTags: (_result, _error, { playerId }) => [
-        { type: "Player", id: playerId },
-      ],
+      invalidatesTags: ["Player"],
     }),
 
     deletePlayer: builder.mutation<void, string>({
@@ -260,6 +292,10 @@ export const {
   useGetSeasonsQuery,
   useGetPostsByIdQuery,
   useGetPostsBySeasonWithLimitQuery,
+  useGetPicturesByIdQuery,
+  useGetPicturesBySeasonSportQuery,
+  useGetPicturesBySeasonSportWithLimitQuery,
+  useCreatePictureMutation,
   useGetVideosQuery,
   useGetVideosWithLimitQuery,
   useGetPostsBySeasonQuery,

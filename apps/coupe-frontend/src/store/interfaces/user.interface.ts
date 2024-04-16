@@ -222,12 +222,31 @@ export interface AuthProps {
     profileImage?: string;
   }
 
+  export interface EditPlayerProps {
+    firstname: string;
+    lastname: string;
+    playerNumber: number;
+    season?: string;
+    position: FootballPosition | BasketballPosition | VolleyballPosition;
+    playerRole: PlayerRole;
+    team?: string;
+    profileImage?: string;
+  }
+
   export interface AddPostProps {
     season: string;
     title: string;
     image?: string;
     content: string;
     author: string; 
+  }
+
+  export interface AddPictureProps {
+    season: any;
+    sport: string;
+    gameweek: GameWeek; 
+    image: string;
+    date: string;
   }
 
   export interface AddMatchStatsProps {

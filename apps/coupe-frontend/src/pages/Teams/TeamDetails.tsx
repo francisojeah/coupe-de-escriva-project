@@ -44,6 +44,8 @@ const TeamDetails = () => {
       seasonId: defaultSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
   const { data: standingsData, isLoading: isLoadingStandings } =
@@ -51,6 +53,8 @@ const TeamDetails = () => {
       seasonId: defaultSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
   const { data: fixtureResultsData, isLoading: isLoadingfixtureResults } =
@@ -58,6 +62,8 @@ const TeamDetails = () => {
       seasonId: defaultSeason?._id,
       division: selectedType,
       sport: activeSportMenu?.sport,
+    }, {
+      refetchOnMountOrArgChange: 10, 
     });
 
   const handleTypeChange = (type: any) => {
@@ -207,8 +213,8 @@ const TeamDetails = () => {
                 {groupPlayersByPosition(
                   playersData?.filter(
                     (player) =>
-                      player.team._id.toString() ===
-                      confirmedSelectedTeam[0]._id.toString()
+                      player?.team?._id.toString() ===
+                      confirmedSelectedTeam[0]?._id.toString()
                   ) || []
                 )?.map(({ position, players }: any, idx: number) => (
                   <div className="py-4" key={idx}>
@@ -348,11 +354,11 @@ const TeamDetails = () => {
                                 fixtureResultsData
                                   ?.filter((fixture: any) => {
                                     const homeTeamName =
-                                      fixture.fixtures.home_team_id.name
+                                      fixture?.fixtures?.home_team_id?.name
                                         .toLowerCase()
                                         .replace(/\s/g, "-");
                                     const awayTeamName =
-                                      fixture.fixtures.away_team_id.name
+                                      fixture?.fixtures?.away_team_id?.name
                                         .toLowerCase()
                                         .replace(/\s/g, "-");
                                     return (
@@ -378,13 +384,13 @@ const TeamDetails = () => {
 
                               if (latestFixtures[i]) {
                                 const fixture = latestFixtures[i];
-                                if (fixture.fixtures.result) {
+                                if (fixture?.fixtures?.result) {
                                   const homeScore =
-                                    fixture.fixtures.result.home_team_score;
+                                    fixture?.fixtures?.result?.home_team_score;
                                   const awayScore =
-                                    fixture.fixtures.result.away_team_score;
+                                    fixture?.fixtures?.result?.away_team_score;
                                   const isHomeTeam =
-                                    fixture.fixtures.home_team_id.name.toLowerCase() ===
+                                    fixture?.fixtures?.home_team_id?.name?.toLowerCase() ===
                                     standing.team.name
                                       .toLowerCase()
                                       .replace(/\s/g, "-");
@@ -463,7 +469,7 @@ const TeamDetails = () => {
                           fixture.fixtures.away_team_id.name
                             .toLowerCase()
                             .replace(/\s/g, "-") === teamName) && (
-                          <Link to={`/matches/${fixture._id}`}>
+                          <Link to={`/matches/${fixture?._id}`}>
                             <div
                               key={index}
                               className="border flex p-4 justify-center items-center flex-col gap-4 border-[#D9D9D9] rounded-xl hover:border-2 hover:shadow-md"
