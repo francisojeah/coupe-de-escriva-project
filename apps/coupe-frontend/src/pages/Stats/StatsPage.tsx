@@ -191,8 +191,8 @@ const StatsPage = () => {
               </div>
               <div>
                 <div className="flex flex-col md:w-full  overflow-x-auto">
-                  <div className=" text-xs rounded-lg text-gray-700 uppercase bg-gray-50 grid grid-cols-10 md:grid-cols-12 font-semibold md:justify-between px-3 py-5 items-center text-center gap-8 h-auto w-full">
-                    <p className="col-span-2 md:col-span-1">Pos</p>
+                  <div className=" text-xs rounded-lg text-gray-700 uppercase bg-gray-50 grid grid-cols-11 md:grid-cols-12 font-semibold md:justify-between px-3 py-5 items-center text-center gap-8 h-auto w-full">
+                    <p className="col-span-3 md:col-span-1">Pos</p>
                     <p className="flex col-span-6 md:col-span-5">Player</p>
                     <p className="md:flex hidden md:col-span-4">Team</p>
                     <p className="col-span-2">Stats</p>
@@ -203,11 +203,17 @@ const StatsPage = () => {
                         <div key={player._id}>
                           <div
                             key={index}
-                            className={`border-b grid grid-cols-10 md:grid-cols-12 h-auto gap-8 border-gray-300 px-3 py-5 w-full items-center justify-between`}
+                            className={`border-b grid grid-cols-11 md:grid-cols-12 h-auto gap-8 border-gray-300 px-3 py-5 w-full items-center justify-between`}
                           >
-                            <p className="flex justify-center col-span-2 md:col-span-1 font-bold ">
+                            <div className="flex justify-around col-span-3 items-center  md:col-span-1 font-bold ">
                               {player.position}.
-                            </p>
+                              <img
+                                src={`/assets/images/${player.team.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
+                                alt="Logo"
+                                className="w-fit h-8 md:hidden flex"
+                              />
+                            </div>
+                            
                             <div className="font-semibold col-span-6 md:col-span-5 whitespace-nowrap">{`${player.firstname} ${player.lastname}`}</div>
                             <div className="md:flex hidden md:col-span-4  gap-4">
                               <img

@@ -176,27 +176,32 @@ const HomeStandings = () => {
                       </p>
                     </div>
                     <div className="flex w-full text-center justify-around">
-                      {/* Render other standing data */}
-                      <p className="w-8">{standing.metrics[0]?.value}</p>
-                      <p className="hidden md:flex md:justify-center w-8">
-                        {standing.metrics[1]?.value}
-                      </p>
-                      <p className="hidden md:flex md:justify-center w-8">
-                        {standing.metrics[2]?.value}
-                      </p>
-                      <p className="hidden md:flex md:justify-center w-8">
-                        {standing.metrics[3]?.value}
-                      </p>
-                      <p className="hidden md:flex md:justify-center w-8">
-                        {standing.metrics[4]?.value}
-                      </p>
-                      <p className="hidden md:flex md:justify-center w-8">
-                        {standing.metrics[5]?.value}
-                      </p>
-                      <p className="w-8">{standing.metrics[6]?.value}</p>
-                      <p className="font-bold w-8">
-                        {standing.metrics[7]?.value}
-                      </p>
+                      {standing.metrics.map((metric: any, index: any) => (
+                        <p
+                          key={index}
+                          className={`w-8 ${
+                            (standing.team.sport === "football" &&
+                              index >= 1 &&
+                              index <= 5) ||
+                            (standing.team.sport === "basketball" &&
+                              index >= 1 &&
+                              index <= 4) ||
+                            (standing.team.sport === "volleyball" &&
+                              index >= 1 &&
+                              index <=4)
+                              ? "hidden md:flex md:justify-center"
+                              : ""
+                          } ${
+                            (standing.team.sport === "football" && index === 7) ||
+                            (standing.team.sport === "basketball" && index === 6) ||
+                            (standing.team.sport === "volleyball" && index === 6)
+                              ? "font-bold"
+                              : ""
+                          }`}
+                        >
+                          {metric.value}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 ))}
