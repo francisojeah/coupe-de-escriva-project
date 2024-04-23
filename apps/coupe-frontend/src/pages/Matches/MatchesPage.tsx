@@ -33,13 +33,16 @@ const MatchesPage = () => {
   const [openAddFixtureModal, setOpenAddFixtureModal] = useState(false);
 
   const { data: fixtureResultsData, isLoading: isLoadingfixtureResults } =
-    useGetFixtureResultsBySeasonDivisionSportQuery({
-      seasonId: selectedSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    }, {
-      refetchOnMountOrArgChange: 10, 
-    });
+    useGetFixtureResultsBySeasonDivisionSportQuery(
+      {
+        seasonId: selectedSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10,
+      }
+    );
 
   const handleSeasonChange = (season: any) => {
     setSelectedSeason(season);
@@ -86,7 +89,6 @@ const MatchesPage = () => {
 
     setSelectedGameWeek(closestGameweek);
   }, [fixtureResultsData]);
-
 
   return (
     <PageLayout>
@@ -192,58 +194,68 @@ const MatchesPage = () => {
               )}
 
               <div className="flex flex-col gap-4">
-                {fixtureResultsData && fixtureResultsData?.map((fixture: any, index: number) => (
-                  <>
-                    {fixture.fixtures.gameweek === selectedGameWeek && (
-                      <Link to={`/matches/${fixture._id}`}>
-                      <div
-                        key={index}
-                        className="border flex p-4 justify-center items-center flex-col gap-4 border-[#D9D9D9] rounded-xl hover:border-2 hover:shadow-md"
-                      >
-                        <p className="font-bold">
-                          {formatDate(fixture.fixtures.date)}
-                        </p>
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1">
-                            <p className="font-semibold">
-                              {fixture.fixtures.home_team_id.name}
-                            </p>
-                            <img
-                              src={`/assets/images/${fixture.fixtures.home_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
-                              alt="Logo"
-                              className="w-fit h-[3.5rem]"
-                            />
-                          </div>
-                          <div className="border flex border-[#D9D9D9] px-2 py-1">
-                            {fixture.fixtures.result ? (
-                              <>
-                                <p className="border-r-2 px-1 border-black">
-                                  {fixture.fixtures.result.home_team_score}
+                {fixtureResultsData &&
+                  fixtureResultsData?.map((fixture: any, index: number) => (
+                    <>
+                      {fixture.fixtures.gameweek === selectedGameWeek && (
+                        <Link to={`/matches/${fixture._id}`}>
+                          <div
+                            key={index}
+                            className="border flex p-4 justify-center items-center flex-col gap-4 border-[#D9D9D9] rounded-xl hover:border-2 hover:shadow-md w-full"
+                          >
+                            <div className="flex gap-4">
+                              <p className="font-bold">
+                                {formatDate(fixture.fixtures.date)}
+                              </p>
+                              {fixture.fixtures.result &&
+                                fixture.fixtures.isLive && (
+                                  <div className="px-[0.6rem] font-bold rounded-full text-[0.75rem] text-[#0e4a20] bg-[#bff9c7] flex gap-2 w-fit h-fit items-center justify-center ">
+                                    <div className="rounded-full bg-[#0e4a20] w-2 h-2"></div>
+                                    Live
+                                  </div>
+                                )}
+                            </div>
+                            <div className="flex items-center gap-4 w-full justify-center">
+                              <div className="flex items-center justify-end gap-1 w-full">
+                                <p className="font-semibold">
+                                  {fixture.fixtures.home_team_id.name}
                                 </p>
-                                <p className="px-1">
-                                  {fixture.fixtures.result.away_team_score}
+                                <img
+                                  src={`/assets/images/${fixture.fixtures.home_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
+                                  alt="Logo"
+                                  className="w-fit h-[3.5rem]"
+                                />
+                              </div>
+                              <div className="border flex border-[#D9D9D9] px-2 py-2">
+                                {fixture.fixtures.result ? (
+                                  <>
+                                    <p className="border-r-2 px-2 border-black">
+                                      {fixture.fixtures.result.home_team_score}
+                                    </p>
+                                    <p className="px-2">
+                                      {fixture.fixtures.result.away_team_score}
+                                    </p>
+                                  </>
+                                ) : (
+                                  <p className="px-2">vs</p>
+                                )}
+                              </div>
+                              <div className="flex items-center w-full gap-1">
+                                <img
+                                  src={`/assets/images/${fixture.fixtures.away_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
+                                  alt="Logo"
+                                  className="w-fit h-[3.5rem]"
+                                />
+                                <p className="font-semibold">
+                                  {fixture.fixtures.away_team_id.name}
                                 </p>
-                              </>
-                            ) : (
-                              <p className="px-1">vs</p>
-                            )}
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <img
-                              src={`/assets/images/${fixture.fixtures.away_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
-                              alt="Logo"
-                              className="w-fit h-[3.5rem]"
-                            />
-                            <p className="font-semibold">
-                              {fixture.fixtures.away_team_id.name}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      </Link>
-                    )}
-                  </>
-                ))}
+                        </Link>
+                      )}
+                    </>
+                  ))}
               </div>
             </div>
             <AddMatchModal

@@ -34,23 +34,28 @@ const StandingsPage = () => {
   const [selectedSeason, setSelectedSeason] = useState(defaultSeason);
 
   const { data: standingsData, isLoading: isLoadingStandings } =
-    useGetStandingsBySeasonDivisionSportQuery({
-      seasonId: selectedSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    }, {
-      refetchOnMountOrArgChange: 10, 
-    });
+    useGetStandingsBySeasonDivisionSportQuery(
+      {
+        seasonId: selectedSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10,
+      }
+    );
 
-    const { data: fixtureResultsData, isLoading: isLoadingfixtureResults } =
-    useGetFixtureResultsBySeasonDivisionSportQuery({
-      seasonId: defaultSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    }, {
-      refetchOnMountOrArgChange: 10, 
-    });
-
+  const { data: fixtureResultsData, isLoading: isLoadingfixtureResults } =
+    useGetFixtureResultsBySeasonDivisionSportQuery(
+      {
+        seasonId: defaultSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10,
+      }
+    );
 
   const handleSeasonChange = (season: any) => {
     setSelectedSeason(season);
@@ -196,17 +201,16 @@ const StandingsPage = () => {
                       </div>
                       <div className="flex md:w-full text-center gap-4 md:gap-0 md:justify-around">
                         {/* Render other standing data */}
-                        <p className="md:w-8 w-6">{standing.metrics[0]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[1]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[2]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[3]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[4]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[5]?.value}</p>
-                        <p className="md:w-8 w-6">{standing.metrics[6]?.value}</p>
-                        <p className="font-bold md:w-8 w-6">
-                          {standing.metrics[7]?.value}
-                        </p>
+                        {standing.metrics.map((metric, index) => (
+                          <p
+                            key={index}
+                            className={`md:w-8 w-6 ${index === standing.metrics.length - 1 ? "font-bold" : ""}`}
+                          >
+                            {metric.value}
+                          </p>
+                        ))}
                       </div>
+
                       <div className="flex md:w-60 gap-1.5 md:gap-0 md:justify-between">
                         {Array.from({ length: 5 }).map((_, i) => {
                           const latestFixtures =
@@ -243,18 +247,22 @@ const StandingsPage = () => {
 
                           if (latestFixtures[i]) {
                             const fixture = latestFixtures[i];
-                            if (fixture.fixtures.result) {
+                            if (fixture?.fixtures?.result) {
                               const homeScore =
                                 fixture.fixtures.result.home_team_score;
                               const awayScore =
                                 fixture.fixtures.result.away_team_score;
                               const isHomeTeam =
-                                fixture.fixtures.home_team_id.name.toLowerCase() ===
+                                fixture.fixtures.home_team_id.name
+                                  .toLowerCase()
+                                  .replace(/\s/g, "-") ===
                                 standing.team.name
                                   .toLowerCase()
                                   .replace(/\s/g, "-");
                               const isAwayTeam =
-                                fixture.fixtures.away_team_id.name.toLowerCase() ===
+                                fixture.fixtures.away_team_id.name
+                                  .toLowerCase()
+                                  .replace(/\s/g, "-") ===
                                 standing.team.name
                                   .toLowerCase()
                                   .replace(/\s/g, "-");
@@ -283,7 +291,12 @@ const StandingsPage = () => {
                                 );
                                 bgColorClass = "bg-[#E0005E]";
                               } else {
-                                resultIcon = <FaMinus color="#666666" style={{padding: 2}} />;
+                                resultIcon = (
+                                  <FaMinus
+                                    color="#666666"
+                                    style={{ padding: 2 }}
+                                  />
+                                );
                               }
                             } else {
                               resultIcon = (

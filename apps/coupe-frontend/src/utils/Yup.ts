@@ -124,9 +124,6 @@ export const AddFixtureResultSchema = Yup.object().shape({
     home_team_id: Yup.string().required("Home team is required"),
     away_team_id: Yup.string().required("Away team is required"),
     date: Yup.date().required("Date is required"),
-    gameweek: Yup.mixed()
-      .oneOf(Object.values(GameWeek))
-      .required("Gameweek is required"),
   }),
 });
 

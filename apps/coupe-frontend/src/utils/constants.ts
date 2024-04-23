@@ -331,6 +331,7 @@ export interface Fixture {
   stats?: PlayerStats;
   image?: string;
   gameweek: GameWeek;
+  isLive: Boolean;
 }
 
 // Define interface for fixture result properties
@@ -341,12 +342,50 @@ export interface FixtureResultProps {
   fixtures: Fixture;
 }
 
-export const formatDate = (date: string) => {
+export const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     month: "long",
     day: "numeric",
   };
-  const formattedDate = new Date(date).toLocaleDateString("en-US", options);
-  return formattedDate;
+
+  const isToday = (targetDate: Date) => {
+    const today = new Date();
+    return (
+      targetDate.getDate() === today.getDate() &&
+      targetDate.getMonth() === today.getMonth() &&
+      targetDate.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const isTomorrow = (targetDate: Date) => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return (
+      targetDate.getDate() === tomorrow.getDate() &&
+      targetDate.getMonth() === tomorrow.getMonth() &&
+      targetDate.getFullYear() === tomorrow.getFullYear()
+    );
+  };
+
+  const isYesterday = (targetDate: Date) => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return (
+      targetDate.getDate() === yesterday.getDate() &&
+      targetDate.getMonth() === yesterday.getMonth() &&
+      targetDate.getFullYear() === yesterday.getFullYear()
+    );
+  };
+
+  const targetDate = new Date(dateString);
+  if (isToday(targetDate)) {
+    return "Today";
+  } else if (isTomorrow(targetDate)) {
+    return "Tomorrow";
+  } else if (isYesterday(targetDate)) {
+    return "Yesterday";
+  } else {
+    return targetDate.toLocaleDateString("en-US", options);
+  }
 };

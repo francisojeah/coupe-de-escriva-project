@@ -5,8 +5,9 @@ import {
   teamsList,
   toCamelCase,
 } from "../../utils/constants";
-import { useState, useRef, useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import {
+  useEndMatchMutation,
   useGetFixtureResultByIdQuery,
   useGetPlayersByTeamIdQuery,
   useUpdateFixtureResultMutation,
@@ -29,6 +30,7 @@ const MatchDetails = () => {
   const [activeDetailTab, setActiveDetailTab] = useState("lineup");
   const [activeLineup, setActiveLineup] = useState("home");
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+  const [openConfirmationModal1, setOpenConfirmationModal1] = useState(false);
   const [openAddLineUpModal, setOpenAddLineUpModal] = useState(false);
   const [openAddMatchStatsModal, setOpenAddMatchStatsModal] = useState(false);
 
@@ -38,7 +40,7 @@ const MatchDetails = () => {
 
   const { data: fixtureResultData, isLoading: isLoadingFixtureResult } =
     useGetFixtureResultByIdQuery(fixtureResultId, {
-      refetchOnMountOrArgChange: 10, 
+      refetchOnMountOrArgChange: 10,
     });
 
   const handleChangeTab = (tabId: any) => {
@@ -51,12 +53,15 @@ const MatchDetails = () => {
     }
   };
 
-  const [
-    updateFixtureResult,
-  ]: any = useUpdateFixtureResultMutation();
+  const [updateFixtureResult]: any = useUpdateFixtureResultMutation();
+  const [endMatch]: any = useEndMatchMutation();
 
   const handleStartGame = () => {
     setOpenConfirmationModal(true);
+  };
+
+  const handleEndGame = () => {
+    setOpenConfirmationModal1(true);
   };
 
   const handleAddLineUp = () => {
@@ -106,12 +111,12 @@ const MatchDetails = () => {
 
   const { data: homePlayersData, isLoading: isLoadingHomePlayers } =
     useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.home_team_id?._id, {
-      refetchOnMountOrArgChange: 10, 
+      refetchOnMountOrArgChange: 10,
     });
 
   const { data: awayPlayersData, isLoading: isLoadingAwayPlayers } =
     useGetPlayersByTeamIdQuery(fixtureResultData?.fixtures?.away_team_id?._id, {
-      refetchOnMountOrArgChange: 10, 
+      refetchOnMountOrArgChange: 10,
     });
 
   const positionAbbreviations: any = {
@@ -156,7 +161,7 @@ const MatchDetails = () => {
         ? fixtureResultData?.fixtures?.lineup?.home
         : fixtureResultData?.fixtures?.lineup?.away;
     return lineup?.players.some(
-      (p) => p?.player_id === player?._id && p?.isSubstitute
+      (p: any) => p?.player_id === player?._id && p?.isSubstitute
     );
   };
 
@@ -252,7 +257,7 @@ const MatchDetails = () => {
       });
 
       return (
-        <div className="flex flex-col gap-8" key={stat}>
+        <div className="flex flex-col gap-6" key={stat}>
           {/* Stat type header */}
           <p className="font-bold text-xl md:text-2xl flex justify-center">
             {stat?.toUpperCase()}
@@ -276,7 +281,7 @@ const MatchDetails = () => {
                 {stat !== "mvp" ? (
                   <div
                     key={index} // Use index as key since player_id might be undefined
-                    className={`flex justify-between items-center border-b border-gray-200 md:px-12 px-4 py-2 `}
+                    className={`flex justify-between items-center border-b border-gray-200 md:px-12 px-4 py-4 `}
                   >
                     <div className="flex gap-4 md:gap-8">
                       <img
@@ -357,8 +362,6 @@ const MatchDetails = () => {
     });
   };
 
-  console.log(awayPlayersData);
-
   return (
     <PageLayout>
       <>
@@ -438,7 +441,15 @@ const MatchDetails = () => {
                     </div>
                   </div>
                 </div>
-
+                {fixtureResultData?.fixtures?.result &&
+                  fixtureResultData?.fixtures?.isLive && (
+                    <div
+                      className="px-[0.75rem] font-bold rounded-[0.25rem] text-[1rem] text-[#0e4a20] bg-[#bff9c7] flex gap-2 w-fit h-fit items-center justify-center "
+                    >
+                      <div className="rounded-full bg-[#0e4a20] w-2 h-2"></div>
+                      Live
+                    </div>
+                  )}
                 <div className="flex gap-10 flex-col md:flex-row">
                   {userSlice?.user?.roles?.includes(Role.Admin) &&
                     !fixtureResultData?.fixtures?.result && (
@@ -447,6 +458,17 @@ const MatchDetails = () => {
                         onClick={handleStartGame}
                       >
                         Start Game
+                      </button>
+                    )}
+
+                  {userSlice?.user?.roles?.includes(Role.Admin) &&
+                    fixtureResultData?.fixtures?.result &&
+                    fixtureResultData?.fixtures?.isLive && (
+                      <button
+                        className="bg-custom-primary-1 flex w-52 text-white text-[16px] h-fit font-[700] py-2 px-4 rounded-[5px] justify-center hover:text-custom-primary-1 hover:border-custom-primary-1 hover:border hover:bg-white"
+                        onClick={handleEndGame}
+                      >
+                        End Game
                       </button>
                     )}
 
@@ -499,8 +521,8 @@ const MatchDetails = () => {
                         style={{
                           backgroundImage: `url(${homeTeam?.backgroundBanner})`,
                           backgroundSize: "contain",
-                      backgroundRepeat: "repeat",
-                      backgroundPosition: "center",
+                          backgroundRepeat: "repeat",
+                          backgroundPosition: "center",
                           width: "100%",
                           height: "100%",
                         }}
@@ -541,8 +563,8 @@ const MatchDetails = () => {
                         style={{
                           backgroundImage: `url(${awayTeam?.backgroundBanner})`,
                           backgroundSize: "contain",
-                      backgroundRepeat: "repeat",
-                      backgroundPosition: "center",
+                          backgroundRepeat: "repeat",
+                          backgroundPosition: "center",
                           width: "100%",
                           height: "100%",
                         }}
@@ -963,6 +985,13 @@ const MatchDetails = () => {
             updateFixtureResult({ id: fixtureResultId })
           }
           message={"Are you sure you want to start this match?"}
+        />
+        <ConfirmationModal
+          openModal={openConfirmationModal1}
+          isLoading={isLoadingFixtureResult}
+          setOpenModal={setOpenConfirmationModal1}
+          confirmationFunction={() => endMatch({ id: fixtureResultId })}
+          message={"Are you sure you want to end this match?"}
         />
         <AddLineUpModal
           openModal={openAddLineUpModal}

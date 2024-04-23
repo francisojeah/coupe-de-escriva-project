@@ -11,7 +11,6 @@ import { StandingsProps } from "../interfaces/user.interface";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  // baseUrl: "http://localhost:3000/",
   baseUrl: "https://coupe-de-escriva-backend.onrender.com/",
   prepareHeaders: (headers, { getState }: any) => {
     const token = getState()?.auth?.token;
@@ -267,6 +266,14 @@ export const appApi = createApi({
       invalidatesTags: ["Match", "Player", "Standing", "Team"], // Invalidate match cache after updating a fixture result
     }),
 
+    endMatch: builder.mutation<FixtureResultProps, any>({
+      query: ({ id }) => ({
+        url: `/fixture-results/end-game/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Match"], // Invalidate match cache after updating a fixture result
+    }),
+
     updateFixtureResultStats: builder.mutation<FixtureResultProps, any>({
       query: ({ id, props }) => ({
         url: `/fixture-results/stats/${id}`,
@@ -321,4 +328,5 @@ export const {
   useGetAllFixtureResultsQuery,
   useUpdateFixtureResultMutation,
   useDeleteFixtureResultMutation,
+  useEndMatchMutation,
 } = appApi;
