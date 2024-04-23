@@ -215,11 +215,11 @@ const StatsPage = () => {
                             </div>
                             
                             <div className="font-semibold col-span-6 md:col-span-5 whitespace-nowrap">{`${player.firstname} ${player.lastname}`}</div>
-                            <div className="md:flex hidden md:col-span-4  gap-4">
+                            <div className="md:flex hidden md:col-span-4 items-center gap-4">
                               <img
                                 src={`/assets/images/${player.team.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
                                 alt="Logo"
-                                className="w-fit h-7"
+                                className="w-fit h-8"
                               />
                               <p className="font-semibold whitespace-nowrap">
                                 {player.team.name}
