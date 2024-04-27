@@ -153,7 +153,7 @@ const HomeStandings = () => {
                     key={index}
                     className={`border-b-2 ${index < 2 ? "border-l-4 border-l-[#4D8A2F]" : ""} flex h-auto gap-8 border-gray-300 px-3 py-5 md:w-full items-center md:justify-between`}
                   >
-                    <div className="flex md:w-96 md:gap-6 gap-4 w-full">
+                    <div className="flex items-center md:w-96 md:gap-6 gap-4 w-full">
                       <p className="flex justify-between font-bold w-10 text-center order items-center">
                         {standing.prevPosition &&
                         standing.prevPosition < standing.position ? (
@@ -171,7 +171,7 @@ const HomeStandings = () => {
                         alt="Logo"
                         className="w-fit h-7"
                       />
-                      <p className="font-bold whitespace-nowrap">
+                      <p className="font-bold ">
                         {standing.team.name}
                       </p>
                     </div>
