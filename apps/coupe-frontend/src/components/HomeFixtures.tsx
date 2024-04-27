@@ -125,15 +125,15 @@ const HomeFixtures = () => {
                         </div>
                       )}
                     </div>
-                    <div className="flex items-center gap-4 w-full justify-center">
+                    <div className="flex items-center gap-1 sm:gap-4 w-full justify-center">
                       <div className="flex items-center justify-end gap-1 w-full">
-                        <p className="font-semibold">
+                        <p className="font-semibold text-right">
                           {fixture.fixtures.home_team_id.name}
                         </p>
                         <img
                           src={`/assets/images/${fixture.fixtures.home_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
                           alt="Logo"
-                          className="w-fit h-[3.5rem]"
+                          className="w-fit h-[2.5rem] sm:h-[3.5rem]"
                         />
                       </div>
                       <div className="border flex border-[#D9D9D9] px-2 py-2">
@@ -154,7 +154,7 @@ const HomeFixtures = () => {
                         <img
                           src={`/assets/images/${fixture.fixtures.away_team_id.name?.toLowerCase().replace(/\s+/g, "-")}-logo.svg`}
                           alt="Logo"
-                          className="w-fit h-[3.5rem]"
+                          className="w-fit h-[2.5rem] sm:h-[3.5rem]"
                         />
                         <p className="font-semibold">
                           {fixture.fixtures.away_team_id.name}

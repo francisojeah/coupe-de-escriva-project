@@ -39,14 +39,14 @@ const HomeTeams = () => {
         <div className="md:text-3xl text-2xl font-bold">Teams</div>
        
 
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 md:gap-14 w-full">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4 md:gap-14 w-full">
           {teamsList.map(({logo, label }, index) => (
             <Link to={`/teams/${label}`} key={index}>
               <div
                 className={`flex items-center justify-center  gap-4 hover:shadow-lg rounded-2xl border-2 p-6 border-[#D9D9D9]`}
               >
                 <div className="lg:px-3">
-                  <img src={logo} alt="Logo" className="w-fit h-[10rem]" />
+                  <img src={logo} alt="Logo" className="w-fit h-[8rem] sm:h-[10rem]" />
                 </div>
               </div>
             </Link>
