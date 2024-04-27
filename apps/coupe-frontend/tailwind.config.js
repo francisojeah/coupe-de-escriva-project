@@ -10,10 +10,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
-        custom: '0px 4px 20px 0px rgba(0, 0, 0, 0.25)',
+        custom: "0px 4px 20px 0px rgba(0, 0, 0, 0.25)",
       },
       colors: {
         custom: {
@@ -41,7 +41,9 @@ export default {
       ...defaultTheme.screens,
     },
   },
-  plugins: [require("flowbite/plugin")({
-    charts: true,
-  })],
+  plugins: [
+    require("flowbite/plugin")({
+      charts: true,
+    }),
+  ],
 };
