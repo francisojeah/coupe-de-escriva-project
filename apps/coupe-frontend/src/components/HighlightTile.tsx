@@ -50,7 +50,7 @@ const YoutubeTile = ({
             {formattedDuration}
           </div>
         </div>
-        <div className="md:px-4 px-2 flex flex-col justify-between md:h-24 h-28 hover:underline">
+        <div className="md:px-4 px-2 flex flex-col justify-between sm:h-24 h-40 hover:underline">
           <p className="text-sm font-medium">{title}</p>
           <p className="text-sm">{formatDateWithoutTime(publishedAt)}</p>
         </div>
