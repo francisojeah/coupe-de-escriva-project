@@ -21,7 +21,6 @@ const PostPage = () => {
       <>
         <MetaTags
           title={"Post | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {postIsLoading ? (

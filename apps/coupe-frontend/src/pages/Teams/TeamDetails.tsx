@@ -137,7 +137,6 @@ const TeamDetails = () => {
       <>
         <MetaTags
           title={`${selectedTeam?.title || ""} | Coupe de Escriva`}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {isLoadingPlayers || isLoadingStandings || isLoadingfixtureResults ? (

@@ -45,7 +45,7 @@ const PlayersPage = () => {
         sport: activeSportMenu?.sport,
       },
       {
-        refetchOnMountOrArgChange: 10, 
+        refetchOnMountOrArgChange: 10,
       }
     );
 
@@ -75,7 +75,6 @@ const PlayersPage = () => {
       <>
         <MetaTags
           title={"Players | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {isLoadingPlayers ? (

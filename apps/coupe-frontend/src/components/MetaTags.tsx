@@ -34,11 +34,15 @@ const MetaTags = ({ title, description, keywords, pageUrl }: MetaTagsProps) => {
 };
 
 MetaTags.defaultProps = {
-  title: "Coupe De Escriva News, Fixtures, Scores & Results | Official Website",
+  title:
+    "Coupe De Escriva | News, Fixtures, Scores & Results | Official Website",
+
   keywords:
-    "Coupe De Escriva, CoupeDeEscriva Sports, Soccer, Football, Basketball,  Volleyball, League, Offical, Coupe",
+    "Coupe De Escriva, Sports, Soccer, Football, Basketball, Volleyball, League, Official, Coupe, News, Fixtures, Scores, Results",
+
   description:
-    "Get the latest Coupe De Escriva news, fixtures, results, video hightlights, transfers and more from the official website of the Coupe De Escriva",
+    "Welcome to the official website of Coupe De Escriva! Stay updated with the latest news, fixtures, results, video highlights, transfers, and more. Get insights into matches, player stats, and team standings.",
+
   pageUrl: window.location.href,
 };
 

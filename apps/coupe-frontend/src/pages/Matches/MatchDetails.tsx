@@ -367,7 +367,6 @@ const MatchDetails = () => {
       <>
         <MetaTags
           title={`${fixtureResultData?.fixtures?.home_team_id?.name?.slice(0, 3)?.toUpperCase() ?? ""} vs ${fixtureResultData?.fixtures?.away_team_id?.name?.slice(0, 3)?.toUpperCase() ?? ""} | Coupe de Escriva`}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {isLoadingFixtureResult ? (
@@ -443,9 +442,7 @@ const MatchDetails = () => {
                 </div>
                 {fixtureResultData?.fixtures?.result &&
                   fixtureResultData?.fixtures?.isLive && (
-                    <div
-                      className="px-[0.75rem] font-bold rounded-[0.25rem] text-[1rem] text-[#0e4a20] bg-[#bff9c7] flex gap-2 w-fit h-fit items-center justify-center "
-                    >
+                    <div className="px-[0.75rem] font-bold rounded-[0.25rem] text-[1rem] text-[#0e4a20] bg-[#bff9c7] flex gap-2 w-fit h-fit items-center justify-center ">
                       <div className="rounded-full bg-[#0e4a20] w-2 h-2"></div>
                       Live
                     </div>

@@ -59,7 +59,7 @@
 //       <>
 //         <MetaTags
 //           title={"Posts | Coupe de Escriva"}
-//           description={"Coupe de Escriva"}
+//           
 //           pageUrl={window.location.href}
 //         />
 //         <div className="flex flex-col gap-8 md:gap-12">

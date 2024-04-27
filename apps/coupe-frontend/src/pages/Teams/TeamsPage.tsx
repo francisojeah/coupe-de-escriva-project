@@ -38,31 +38,30 @@ const TeamsPage = () => {
   return (
     <PageLayout>
       <>
-      <MetaTags
+        <MetaTags
           title={"Teams | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
-      <div className="flex flex-col gap-12">
-        <div className="text-3xl md:text-4xl font-bold">Teams</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-24 md:gap-y-16">
-          {teamsList.map(({ title, logo, label }, index) => (
-            <Link to={`/teams/${label}`} key={index}>
-              <div
-                className={`flex flex-col gap-4 hover:shadow-lg rounded-2xl border-2 p-6 border-[#D9D9D9]`}
-              >
-                <div>
-                  <img src={logo} alt="Logo" className="w-fit h-[9.5rem]" />
+        <div className="flex flex-col gap-12">
+          <div className="text-3xl md:text-4xl font-bold">Teams</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-24 md:gap-y-16">
+            {teamsList.map(({ title, logo, label }, index) => (
+              <Link to={`/teams/${label}`} key={index}>
+                <div
+                  className={`flex flex-col gap-4 hover:shadow-lg rounded-2xl border-2 p-6 border-[#D9D9D9]`}
+                >
+                  <div>
+                    <img src={logo} alt="Logo" className="w-fit h-[9.5rem]" />
+                  </div>
+                  <div className="w-full flex px-6 justify-between items-center">
+                    <p className="text-2xl font-bold uppercase">{title}</p>
+                    <FaArrowRight />
+                  </div>
                 </div>
-                <div className="w-full flex px-6 justify-between items-center">
-                  <p className="text-2xl font-bold uppercase">{title}</p>
-                  <FaArrowRight />
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
       </>
     </PageLayout>
   );

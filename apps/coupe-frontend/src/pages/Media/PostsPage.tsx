@@ -40,7 +40,7 @@ const PostsPage = () => {
 
   const { data: postsData, isLoading: postsIsLoading } =
     useGetPostsBySeasonQuery(selectedSeason?._id, {
-      refetchOnMountOrArgChange: 10, 
+      refetchOnMountOrArgChange: 10,
     });
 
   const cardsPerPage = 9;
@@ -62,7 +62,6 @@ const PostsPage = () => {
       <>
         <MetaTags
           title={"Posts | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         <div className="flex flex-col gap-8 md:gap-12">

@@ -16,9 +16,6 @@ const HomePage = () => {
     <PageLayout>
       <>
         <MetaTags
-          title={"Coupe de Escriva"}
-          description={"Coupe de Escriva"}
-          pageUrl={window.location.href}
         />
         <div className="w-full flex flex-col gap-20">
           <Suspense fallback={null}>

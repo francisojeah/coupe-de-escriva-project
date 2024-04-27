@@ -23,13 +23,16 @@ const StatsPage = () => {
   const activeSportMenu: any = useSelector<RootState>((state) => state.sport);
 
   const { data: playersData, isLoading: isLoadingPlayers } =
-    useGetPlayersBySeasonDivisionSportQuery({
-      seasonId: selectedSeason?._id,
-      division: selectedType,
-      sport: activeSportMenu?.sport,
-    }, {
-      refetchOnMountOrArgChange: 10, 
-    });
+    useGetPlayersBySeasonDivisionSportQuery(
+      {
+        seasonId: selectedSeason?._id,
+        division: selectedType,
+        sport: activeSportMenu?.sport,
+      },
+      {
+        refetchOnMountOrArgChange: 10,
+      }
+    );
 
   const handleSeasonChange = (season: any) => {
     setSelectedSeason(season);
@@ -96,7 +99,6 @@ const StatsPage = () => {
       <>
         <MetaTags
           title={"Stats | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {isLoadingPlayers ? (
@@ -213,7 +215,7 @@ const StatsPage = () => {
                                 className="w-fit h-8 md:hidden flex"
                               />
                             </div>
-                            
+
                             <div className="font-semibold col-span-6 md:col-span-5 whitespace-nowrap">{`${player.firstname} ${player.lastname}`}</div>
                             <div className="md:flex hidden md:col-span-4 items-center gap-4">
                               <img

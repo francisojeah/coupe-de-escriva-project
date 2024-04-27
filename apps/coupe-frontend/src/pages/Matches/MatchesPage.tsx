@@ -95,7 +95,6 @@ const MatchesPage = () => {
       <>
         <MetaTags
           title={"Fixtures & Results | Coupe de Escriva"}
-          description={"Coupe de Escriva"}
           pageUrl={window.location.href}
         />
         {isLoadingfixtureResults ? (
