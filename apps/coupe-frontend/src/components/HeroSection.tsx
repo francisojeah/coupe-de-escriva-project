@@ -43,7 +43,7 @@ const CountUpSection = ({ targetValues, steps, delays, labels }: any) => {
 };
 
 const HeroSection = () => {
-  const steps = [1, 1, 5];
+  const steps = [1, 1, 3];
   const delays = [300, 300, 30];
   const labels = ["Teams", "Sports", "Players"];
 
