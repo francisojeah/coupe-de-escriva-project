@@ -948,7 +948,7 @@ const MatchDetails = () => {
                 <div
                   className={`${activeDetailTab === "stats" ? "flex flex-col gap-8" : "hidden"}`}
                 >
-                  {!homeOrderedStats || !awayOrderedStats ? (
+                  {!homeOrderedStats && !awayOrderedStats ? (
                     <div className="flex flex-col text-[#888C90] gap-5  w-full py-24 justify-center items-center">
                       <FaUsers size={40} />
                       <p className="">
@@ -957,16 +957,11 @@ const MatchDetails = () => {
                     </div>
                   ) : (
                     <div className="flex flex-col gap-14">
-                      {homePlayersData &&
-                        awayPlayersData &&
-                        renderPlayerStatsByType(
-                          homeOrderedStats,
-                          awayOrderedStats,
-                          [
-                            ...(homePlayersData || []),
-                            ...(awayPlayersData || []),
-                          ]
-                        )}
+                      {renderPlayerStatsByType(
+                        homeOrderedStats,
+                        awayOrderedStats,
+                        [...(homePlayersData || []), ...(awayPlayersData || [])]
+                      )}
                     </div>
                   )}
                 </div>
