@@ -230,12 +230,20 @@ const MatchDetails = () => {
   ) => {
     const combinedStatsByType: any = {};
 
-    // Merge home and away stats for each type
-    Object.keys(homeStatsByType)?.forEach((statType) => {
-      combinedStatsByType[statType] = homeStatsByType[statType].concat(
-        awayStatsByType[statType]
-      );
-    });
+  // Merge home and away stats for each type
+  const allStatTypes = new Set([
+    ...Object.keys(homeStatsByType || {}),
+    ...Object.keys(awayStatsByType || {}),
+  ]);
+
+  allStatTypes.forEach((statType) => {
+    combinedStatsByType[statType] = [
+      ...(homeStatsByType[statType] || []),
+      ...(awayStatsByType[statType] || []),
+    ];
+  });
+
+  console.log(combinedStatsByType);
 
     return Object.entries(combinedStatsByType)?.map(([stat, players]: any) => {
       // Sort players by the value of the stat and then alphabetically by first name if positions are the same
