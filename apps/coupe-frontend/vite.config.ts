@@ -6,11 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA({
-      strategies: "injectManifest",
-      srcDir: "src/custom-sw",
-      filename: "my-sw.ts",
-    }),
+    // VitePWA({
+    //   strategies: "injectManifest",
+    //   srcDir: "src/custom-sw",
+    //   filename: "my-sw.ts",
+    // }),
   ],
   resolve: {
     alias: {
