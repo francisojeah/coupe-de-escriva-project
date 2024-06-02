@@ -1,6 +1,6 @@
-# *
 User-agent: *
-Allow: /
+Disallow: /login
+Disallow: /signup
 
 # Host
 Host: https://coupedeescriva.netlify.app
