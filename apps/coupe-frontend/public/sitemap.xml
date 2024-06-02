@@ -59,9 +59,8 @@
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
-    <!-- Example specific team URL -->
     <url>
-        <loc>https://coupedeescriva.netlify.app/teams/team-name</loc>
+        <loc>https://coupedeescriva.netlify.app/teams/*</loc>
         <lastmod>2024-06-02T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
