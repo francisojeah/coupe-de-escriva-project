@@ -1,5 +1,5 @@
 {
-  "name": "Coupe-De-Escriva",
+  "name": "coupe-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -59,7 +59,7 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.7",
+    "vite": "^5.1.4",
     "vite-plugin-pwa": "^0.19.3"
   },
   "optionalDependencies": {
