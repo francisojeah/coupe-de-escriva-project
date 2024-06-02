@@ -13,5 +13,4 @@
 <url><loc>https://coupedeescriva.netlify.app/videos</loc><lastmod>2024-06-02T00:00:00+00:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://coupedeescriva.netlify.app/posts</loc><lastmod>2024-06-02T00:00:00+00:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://coupedeescriva.netlify.app/posts/:id</loc><lastmod>2024-06-02T00:00:00+00:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://coupedeescriva.netlify.app/*</loc><lastmod>2024-06-02T00:00:00+00:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
