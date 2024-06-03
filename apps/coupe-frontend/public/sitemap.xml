@@ -7,79 +7,79 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
         <loc>https://coupedeescriva.netlify.app</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/home</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/fantasy</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/matches</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/matches/*</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/players</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/standings</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/stats</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/teams</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/teams/*</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/videos</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/posts</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://coupedeescriva.netlify.app/posts/*</loc>
-        <lastmod>2024-06-02T00:00:00+00:00</lastmod>
+        <lastmod>2024-06-03T00:00:00+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
