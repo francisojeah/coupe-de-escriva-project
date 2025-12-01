@@ -56,7 +56,7 @@
     "mongoose": "^8.2.1",
     "mongoose-sequence": "^6.0.1",
     "nest-winston": "^1.9.4",
-    "nodemailer": "^6.9.12",
+    "nodemailer": "^7.0.11",
     "nunjucks": "^3.2.4",
     "openapi-typescript-codegen": "^0.27.0",
     "passport": "^0.7.0",
